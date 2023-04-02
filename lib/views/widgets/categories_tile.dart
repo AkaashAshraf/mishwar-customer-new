@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gronik/config/api_urls.dart';
+import 'package:gronik/model/category.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_sizes.dart';
 import '../theme/text_theme.dart';
@@ -6,13 +8,14 @@ import '../theme/text_theme.dart';
 class CategoriesTile extends StatelessWidget {
   const CategoriesTile({
     Key? key,
-    required this.categoryName,
-    required this.imageLocation,
+    required this.category,
+    // required this.categoryName,
+    // required this.imageLocation,
     this.onTap,
   });
-
-  final String categoryName;
-  final String imageLocation;
+  final Category category;
+  // final String categoryName;
+  // final String imageLocation;
   final void Function()? onTap;
 
   @override
@@ -32,13 +35,20 @@ class CategoriesTile extends StatelessWidget {
                 color: AppColors.APP_GREEN,
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(imageLocation),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    "${imageBaseUrl}category/${category.image}",
+                    fit: BoxFit.cover,
+                  )),
             ),
             /* <---- Text ----> */
             AppSizes.hGap5,
-            Text(
-              '$categoryName',
-              style: AppText.paragraph1.copyWith(fontSize: 12),
+            Expanded(
+              child: Text(
+                category.name ?? "",
+                style: AppText.paragraph1.copyWith(fontSize: 12),
+              ),
             ),
           ],
         ),

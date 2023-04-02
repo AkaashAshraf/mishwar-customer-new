@@ -1,13 +1,16 @@
 import 'package:get/get.dart';
 import 'package:gronik/config/api_urls.dart';
 import 'package:gronik/http/http.dart';
-import 'package:gronik/model/categories_list.dart';
+import 'package:gronik/model/banner.dart';
 import 'package:gronik/model/category.dart';
+import 'package:gronik/model/dashboard.dart';
+import 'package:gronik/model/product.dart';
 
-class CategoriesController extends GetxController {
+class DashboardController extends GetxController {
   RxBool loading = false.obs;
-
+  RxList<Banner> banners = <Banner>[].obs;
   RxList<Category> categories = <Category>[].obs;
+  RxList<Product> products = <Product>[].obs;
   @override
   void onInit() {
     fetchData();
@@ -18,17 +21,21 @@ class CategoriesController extends GetxController {
   void dispose() {
     super.dispose();
     loading.close();
+    banners.close();
     categories.close();
+    products.close();
   }
 
   fetchData() async {
     try {
       loading(true);
-      var response = await get(categoriesDataUrl);
+      var response = await get(dashboardDataUrl);
       if (response != null) {
         if (response?.statusCode == 200) {
-          var jsonResponse = categoriesFromJson(response?.body);
-          categories(jsonResponse);
+          var jsonResponse = dashboardFromJson(response?.body);
+          banners(jsonResponse.banners);
+          categories(jsonResponse.categories);
+          products(jsonResponse.products);
         }
       }
     } catch (e) {

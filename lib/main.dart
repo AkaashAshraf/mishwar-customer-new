@@ -15,6 +15,7 @@ void main() async {
   runApp(MyApp());
   AppUiHelper.autoRotateOff();
   Get.put(NavigationController());
+
   Get.put(CartController());
 }
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // ini();
     return GetMaterialApp(
-      title: 'Gronik',
+      title: 'Meshwar',
       theme: AppThemes.lightGronikTheme,
       home: GronikRoot(),
     );

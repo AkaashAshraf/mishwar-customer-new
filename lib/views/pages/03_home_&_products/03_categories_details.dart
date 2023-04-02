@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/cart/cart_controller.dart';
@@ -13,7 +12,12 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../../constants/app_colors.dart';
 import '../../theme/text_theme.dart';
 
-class CategoriesDetails extends StatelessWidget {
+class CategoriesDetails extends StatefulWidget {
+  @override
+  State<CategoriesDetails> createState() => _CategoriesDetailsState();
+}
+
+class _CategoriesDetailsState extends State<CategoriesDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
