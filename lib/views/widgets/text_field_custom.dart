@@ -17,6 +17,7 @@ class GronikTextField extends StatelessWidget {
     this.marginLabelDisable = false,
     this.maxLines,
     this.enabled = true,
+    this.validator,
   });
 
   final String labelText;
@@ -30,6 +31,7 @@ class GronikTextField extends StatelessWidget {
   final bool marginLabelDisable;
   final int? maxLines;
   final bool enabled;
+  final String? Function(String? value)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -45,32 +47,28 @@ class GronikTextField extends StatelessWidget {
                   style: AppText.b1.copyWith(color: AppColors.NEUTRAL_50),
                 ),
           AppSizes.hGap15,
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppColors.BACKGROUND_COLOR,
-            ),
-            child: TextField(
-              enabled: enabled,
-              onTap: onTap,
-              controller: textEditingController,
-              obscureText: isItPassWordBox,
-              keyboardType: textInputType,
-              cursorColor: AppColors.PRIMARY_COLOR,
-              maxLines: maxLines ?? 1,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-                hintText: hintText,
-                hintStyle: TextStyle(
-                  color: AppColors.PLACHOLDER,
-                ),
-                prefixIcon: prefixIcon,
-                suffixIcon: suffxIcon,
-                focusColor: AppColors.PRIMARY_COLOR,
+          TextFormField(
+            enabled: enabled,
+            onTap: onTap,
+            controller: textEditingController,
+            obscureText: isItPassWordBox,
+            keyboardType: textInputType,
+            cursorColor: AppColors.PRIMARY_COLOR,
+            maxLines: maxLines ?? 1,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
+              hintText: hintText,
+              hintStyle: TextStyle(
+                color: AppColors.PLACHOLDER,
+              ),
+              prefixIcon: prefixIcon,
+              suffixIcon: suffxIcon,
+              focusColor: AppColors.PRIMARY_COLOR,
             ),
+            validator: validator,
           ),
         ],
       ),

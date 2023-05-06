@@ -41,7 +41,7 @@ class _HomeContentState extends State<HomeContent> {
                     Container(
                       width: Get.width * 0.7,
                       child: Text(
-                        'hey_😊_n_let_s_search_your_grocery_food'.tr,
+                        "hey! 😊 let's search your grocery food".tr,
                         style: AppText.paragraph1.copyWith(color: Colors.white),
                       ),
                     ),

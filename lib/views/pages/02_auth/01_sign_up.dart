@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gronik/utils/validations.dart';
+import 'package:gronik/views/pages/02_auth/06_auth_controller.dart';
 import '../../../constants/app_colors.dart';
 import '../../../constants/app_sizes.dart';
 import '../../widgets/text_field_custom.dart';
 import '../../widgets/gronik_layout.dart';
-import '02_login.dart';
 import '../../theme/text_theme.dart';
 
 class SignUpScreen extends StatelessWidget {
-  /* <---- Sign up ----> */
-  _signUp() {
-    Get.to(() => LoginScreen());
-  }
-
-  /* <---- Sign in ----> */
-  _signIn() {
-    Get.to(() => LoginScreen());
-  }
-
   @override
   Widget build(BuildContext context) {
+    final ctr = AuthController.to;
     return Scaffold(
       body: GronikLayoutOne(
         /* <----------- Content ------------> */
@@ -50,28 +42,34 @@ class SignUpScreen extends StatelessWidget {
                 /* <---- Form ----> */
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        GronikTextField(
-                          labelText: 'name'.tr,
-                          hintText: 'enter_your_full_name'.tr,
-                          textEditingController: null,
-                        ),
-                        AppSizes.hGap20,
-                        GronikTextField(
-                          labelText: 'email',
-                          hintText: 'enter_your_email'.tr,
-                          textInputType: TextInputType.emailAddress,
-                          textEditingController: null,
-                        ),
-                        AppSizes.hGap20,
-                        GronikTextField(
-                          labelText: 'password',
-                          hintText: 'enter_a_password',
-                          isItPassWordBox: true,
-                          textEditingController: null,
-                        ),
-                      ],
+                    child: Form(
+                      key: ctr.sFormKey,
+                      child: Column(
+                        children: [
+                          GronikTextField(
+                            labelText: 'name'.tr,
+                            hintText: 'enter_your_full_name'.tr,
+                            textEditingController: ctr.sNameController,
+                            validator: Validation.validateName,
+                          ),
+                          AppSizes.hGap20,
+                          GronikTextField(
+                            labelText: 'email',
+                            hintText: 'enter_your_email'.tr,
+                            textInputType: TextInputType.emailAddress,
+                            textEditingController: ctr.sEmailController,
+                            validator: Validation.validateEmail,
+                          ),
+                          AppSizes.hGap20,
+                          GronikTextField(
+                            labelText: 'password',
+                            hintText: 'enter_a_password',
+                            isItPassWordBox: true,
+                            textEditingController: ctr.sPasswordController,
+                            validator: Validation.validatePassword,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -96,7 +94,7 @@ class SignUpScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(
-              onPressed: _signUp,
+              onPressed: ctr.onSignUp,
               child: Container(
                 width: Get.width * 0.8,
                 padding: EdgeInsets.symmetric(vertical: 15),
@@ -118,7 +116,7 @@ class SignUpScreen extends StatelessWidget {
                 Text('already_have_an_account'.tr),
                 AppSizes.wGap10,
                 InkWell(
-                  onTap: _signIn,
+                  onTap: ctr.navToSignIn,
                   child: Text(
                     'sign_in'.tr,
                     style: AppText.paragraph1

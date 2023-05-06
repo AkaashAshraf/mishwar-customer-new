@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gronik/routes/routes.dart';
 import '../../../constants/app_images.dart';
-import '../02_auth/02_login.dart';
 import '../../../constants/app_sizes.dart';
 import '../../widgets/gronik_layout.dart';
 import '02_account_info.dart';
@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                     child: AppButton(
                       label: 'Logout',
                       onTap: () {
-                        Get.offAll(() => LoginScreen());
+                        Get.offAllNamed(Routers.login);
                       },
                       color: Color(0xFFEB5757),
                     ),

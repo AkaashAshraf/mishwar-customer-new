@@ -87,10 +87,6 @@ class GronikBottomBar extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           MenuItemm(
-                              icon: AppImages.MENU_HOME,
-                              itemName: "",
-                              onTap: () {}),
-                          MenuItemm(
                             icon: AppImages.MENU_HOME,
                             itemName: 'home'.tr,
                             active: controller.selectedMenu == 0,
