@@ -117,4 +117,9 @@ class AppConstants {
   static const String NOTIFICATION_COUNT = 'notification_count';
   static const String TOPIC = 'all_zone_customer';
   static const String ZONE_ID = 'zoneId';
+
+  // image folder or image type :
+  static const String CATEGORY_IMG = 'category';
+  static const String PRODUCT_IMG = 'product';
+  static const String BANNER_IMG = 'banner';
 }

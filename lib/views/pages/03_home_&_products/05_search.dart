@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:gronik/controller/product/search_product_controller.dart';
+import 'package:gronik/routes/routes.dart';
 import '../../../constants/app_images.dart';
 import '../../../constants/app_sizes.dart';
-import '../../../constants/dummyData.dart';
-import '04_product_details.dart';
+import '../../widgets/loading_bar.dart';
 
 import '03_categories_details.dart';
 import '../../../constants/app_colors.dart';
@@ -13,6 +14,7 @@ import '../../theme/text_theme.dart';
 class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ctr = SearchProductController.to;
     return Scaffold(
       body: Container(
         child: Stack(
@@ -63,6 +65,7 @@ class SearchScreen extends StatelessWidget {
                         /* <---- Search Box ----> */
                         AppSizes.hGap30,
                         TextField(
+                          controller: ctr.searchTextCtr,
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.search,
@@ -71,6 +74,8 @@ class SearchScreen extends StatelessWidget {
                             hintText: 'apple'.tr,
                             labelText: 'search_your_daily_grocery_food'.tr,
                           ),
+                          onSubmitted: (text) => ctr.getSearch(),
+                          onChanged: (text) => ctr.getSearch(),
                         )
                       ],
                     ),
@@ -104,76 +109,81 @@ class _ResultView extends StatelessWidget {
         color: Color(0xFFF4F5F7),
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Container(
-        margin: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(32)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            /* <---- Content ----> */
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  /* <---- Filter By ----> */
-                  Row(
-                    children: [
-                      Text(
-                        'filter_by'.tr,
-                        style: AppText.paragraph1.copyWith(
-                          color: AppColors.NEUTRAL_50,
-                        ),
-                      ),
-                      AppSizes.wGap10,
-                      DropdownButton<String>(
-                        underline: SizedBox(),
-                        value: 'low'.tr,
-                        items: [
-                          DropdownMenuItem(
-                            value: 'low'.tr,
-                            child: Text('lowest_price'.tr),
+      child: GetX<SearchProductController>(builder: (ctr) {
+        return ctr.loading
+            ? LoadingBar()
+            : Container(
+                margin: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(32)),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    /* <---- Content ----> */
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          /* <---- Filter By ----> */
+                          Row(
+                            children: [
+                              Text(
+                                'filter_by'.tr,
+                                style: AppText.paragraph1.copyWith(
+                                  color: AppColors.NEUTRAL_50,
+                                ),
+                              ),
+                              AppSizes.wGap10,
+                              DropdownButton<String>(
+                                underline: SizedBox(),
+                                value: 'low'.tr,
+                                items: [
+                                  DropdownMenuItem(
+                                    value: 'low'.tr,
+                                    child: Text('lowest_price'.tr),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'high'.tr,
+                                    child: Text('highest_price'.tr),
+                                  )
+                                ],
+                                onChanged: (value) {},
+                              )
+                            ],
                           ),
-                          DropdownMenuItem(
-                            value: 'high'.tr,
-                            child: Text('highest_price'.tr),
-                          )
+                          /* <---- Total Results ----> */
+                          Text(
+                            '${ctr.totalResults} ' + 'results'.tr,
+                            style: AppText.paragraph1.copyWith(
+                              color: AppColors.NEUTRAL_50,
+                            ),
+                          ),
                         ],
-                        onChanged: (value) {},
-                      )
-                    ],
-                  ),
-                  /* <---- Total Results ----> */
-                  Text(
-                    '345 ' + 'results'.tr,
-                    style: AppText.paragraph1.copyWith(
-                      color: AppColors.NEUTRAL_50,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: StaggeredGridView.countBuilder(
-                crossAxisCount: 4,
-                itemBuilder: (context, index) {
-                  return SingleProduct(
-                    onTap: () {
-                      Get.to(() => ProductDetails(
-                            food: DummyData.foods[index],
-                          ));
-                    },
-                    food: DummyData.foods[index],
-                  );
-                },
-                staggeredTileBuilder: (ti) => StaggeredTile.fit(2),
-                itemCount: DummyData.foods.length,
-              ),
-            ),
-          ],
-        ),
-      ),
+                    Expanded(
+                      child: StaggeredGridView.countBuilder(
+                        crossAxisCount: 4,
+                        itemBuilder: (context, index) {
+                          return SingleProduct(
+                            onTap: () {
+                              Get.toNamed(Routes.prodcutDetails,
+                                  arguments: ctr.searchProducts[index]);
+                            },
+                            food: ctr.searchProducts[index],
+                          );
+                        },
+                        staggeredTileBuilder: (ti) => StaggeredTile.fit(2),
+                        itemCount: ctr.searchProducts.length,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+      }),
     );
   }
 }

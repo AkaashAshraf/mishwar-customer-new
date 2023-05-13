@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gronik/controller/categories/categories_controller.dart';
-import 'package:gronik/views/pages/03_home_&_products/03_categories_details.dart';
+import 'package:gronik/routes/routes.dart';
 import 'package:gronik/views/widgets/categories_tile.dart';
 import '../../widgets/gronik_layout.dart';
 import '00_entrypoint.dart';
@@ -33,7 +33,8 @@ class AllCategories extends StatelessWidget {
                               category: element,
                               onTap: () {
                                 // Go to categories details page
-                                Get.to(() => CategoriesDetails());
+                                Get.toNamed(Routes.categoryDetails,
+                                    arguments: element);
                               },
                             ),
                           )

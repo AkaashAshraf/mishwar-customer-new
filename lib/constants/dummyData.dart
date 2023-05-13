@@ -58,5 +58,5 @@ class DummyData {
     ),
   ];
 
-  static List<Food> cartItems = [];
+  // static List<Food> cartItems = [];
 }

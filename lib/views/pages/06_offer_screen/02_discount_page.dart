@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/app_sizes.dart';
+import '../../../model/product.dart';
 import '../../widgets/gronik_layout.dart';
 import '../../../constants/dummyData.dart';
 import '../../../modal/food.dart';
@@ -77,7 +78,7 @@ class DiscountPage extends StatelessWidget {
                         food: DummyData.foods[index],
                         onTap: () {
                           Get.to(() => ProductDetails(
-                                food: DummyData.foods[index],
+                                food: Product(),
                                 discountON: true,
                               ));
                         },

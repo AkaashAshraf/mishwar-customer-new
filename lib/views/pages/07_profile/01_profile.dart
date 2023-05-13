@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                     child: AppButton(
                       label: 'Logout',
                       onTap: () {
-                        Get.offAllNamed(Routers.login);
+                        Get.offAllNamed(Routes.login);
                       },
                       color: Color(0xFFEB5757),
                     ),

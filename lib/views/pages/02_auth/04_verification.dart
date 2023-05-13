@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gronik/views/pages/02_auth/06_auth_controller.dart';
+import 'package:pinput/pinput.dart';
 import '../../../constants/app_sizes.dart';
 import '../../widgets/gronik_layout.dart';
-import '05_reset_password.dart';
 import '../../../constants/app_colors.dart';
 import '../../theme/text_theme.dart';
 
 class VerificationScreen extends StatelessWidget {
-  /* <---- User clicked continue ----> */
-  _onContinue() {
-    Get.to(() => ResetPassword());
-  }
-
   @override
   Widget build(BuildContext context) {
+    final ctr = AuthController.to;
     return Scaffold(
       body: GronikLayoutOne(
         /* <----------- Content ------------> */
@@ -43,7 +40,7 @@ class VerificationScreen extends StatelessWidget {
                 AppSizes.hGap10,
                 /* <---- Number ----> */
                 Text(
-                  '(+62) 821 321 542 942',
+                  '(${ctr.cuntryCode}) ' + ctr.lPhoneNumberCtr.text,
                   style: AppText.paragraph1
                       .copyWith(color: AppColors.PRIMARY_COLOR),
                 ),
@@ -64,57 +61,7 @@ class VerificationScreen extends StatelessWidget {
                         //   AppColors.backgroundColor: AppColors.bgGreen,
                         //   showCursor: false,
                         // ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(21),
-                              decoration: BoxDecoration(
-                                color: AppColors.BACKGROUND_COLOR,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                '1',
-                                style: AppText.heading2,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(21),
-                              decoration: BoxDecoration(
-                                color: AppColors.BACKGROUND_COLOR,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                '2',
-                                style: AppText.heading2,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(21),
-                              decoration: BoxDecoration(
-                                color: AppColors.BACKGROUND_COLOR,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                '3',
-                                style: AppText.heading2,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(21),
-                              decoration: BoxDecoration(
-                                color: AppColors.APP_GREEN,
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                    width: 1, color: AppColors.PRIMARY_COLOR),
-                              ),
-                              child: Text(
-                                '4',
-                                style: AppText.heading2,
-                              ),
-                            ),
-                          ],
-                        ),
+                        _buldOTPTextField(),
                         /* <---- Didn't Recieve Code ----> */
                         AppSizes.hGap20,
                         Row(
@@ -134,34 +81,34 @@ class VerificationScreen extends StatelessWidget {
                   ),
                 ),
                 /* <----------- Small Notes ------------> */
-                Container(
-                  margin: EdgeInsets.only(bottom: 30),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColors.APP_GREEN,
-                        ),
-                        child: Icon(
-                          Icons.check_box,
-                          color: AppColors.PRIMARY_COLOR,
-                        ),
-                      ),
-                      AppSizes.wGap10,
-                      Expanded(
-                        child: Text(
-                          'Verification codes are only sent to the registered phone number',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: AppColors.NEUTRAL_50,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
+                // Container(
+                //   margin: EdgeInsets.only(bottom: 30),
+                //   child: Row(
+                //     children: [
+                //       Container(
+                //         padding: EdgeInsets.all(5),
+                //         decoration: BoxDecoration(
+                //           shape: BoxShape.circle,
+                //           color: AppColors.APP_GREEN,
+                //         ),
+                //         child: Icon(
+                //           Icons.check_box,
+                //           color: AppColors.PRIMARY_COLOR,
+                //         ),
+                //       ),
+                //       AppSizes.wGap10,
+                //       Expanded(
+                //         child: Text(
+                //           'Verification codes are only sent to the registered phone number',
+                //           style: TextStyle(
+                //             fontSize: 12,
+                //             color: AppColors.NEUTRAL_50,
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ),
@@ -180,7 +127,7 @@ class VerificationScreen extends StatelessWidget {
           child: Column(
             children: [
               TextButton(
-                onPressed: _onContinue,
+                onPressed: () => ctr.onVerify(),
                 child: Container(
                   width: Get.width * 0.8,
                   padding: EdgeInsets.symmetric(vertical: 15),
@@ -199,6 +146,41 @@ class VerificationScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  _buldOTPTextField() {
+    final defaultPinTheme = PinTheme(
+      width: 56,
+      height: 56,
+      textStyle: TextStyle(
+          fontSize: 20,
+          color: Color.fromRGBO(30, 60, 87, 1),
+          fontWeight: FontWeight.w600),
+      decoration: BoxDecoration(
+        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+
+    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+      border: Border.all(color: AppColors.PRIMARY_COLOR),
+      borderRadius: BorderRadius.circular(8),
+    );
+
+    final submittedPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration?.copyWith(
+        color: Color.fromRGBO(234, 239, 243, 1),
+      ),
+    );
+
+    return Pinput(
+      defaultPinTheme: defaultPinTheme,
+      focusedPinTheme: focusedPinTheme,
+      submittedPinTheme: submittedPinTheme,
+      showCursor: true,
+      separator: AppSizes.wGap15,
+      onCompleted: (pin) => AuthController.to.verificationCode = pin,
     );
   }
 }

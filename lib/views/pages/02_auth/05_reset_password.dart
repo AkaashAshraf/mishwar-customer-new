@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/app_sizes.dart';
+import '../../../routes/routes.dart';
 import '../../widgets/text_field_custom.dart';
 import '../../widgets/gronik_layout.dart';
-import '../03_home_&_products/00_entrypoint.dart';
 import '../../../constants/app_colors.dart';
 import '../../theme/text_theme.dart';
 
 class ResetPassword extends StatelessWidget {
   /* <----------- User Pressed save changes ------------> */
   _onSave() {
-    Get.to(() => AppEntryPoint());
+    Get.toNamed(Routes.home);
   }
 
   @override

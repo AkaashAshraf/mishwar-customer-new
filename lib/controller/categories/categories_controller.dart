@@ -1,13 +1,16 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
-import 'package:gronik/config/api_urls.dart';
-import 'package:gronik/http/http.dart';
-import 'package:gronik/model/categories_list.dart';
 import 'package:gronik/model/category.dart';
+import 'package:gronik/repositories/category_repository.dart';
 
 class CategoriesController extends GetxController {
+  final CategoryRepository repo;
+  CategoriesController(this.repo);
   RxBool loading = false.obs;
 
   RxList<Category> categories = <Category>[].obs;
+
   @override
   void onInit() {
     fetchData();
@@ -24,15 +27,9 @@ class CategoriesController extends GetxController {
   fetchData() async {
     try {
       loading(true);
-      var response = await get(categoriesDataUrl);
-      if (response != null) {
-        if (response?.statusCode == 200) {
-          var jsonResponse = categoriesFromJson(response?.body);
-          categories(jsonResponse);
-        }
-      }
+      categories.value = await repo.fetchCategories();
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
     } finally {
       loading(false);
     }

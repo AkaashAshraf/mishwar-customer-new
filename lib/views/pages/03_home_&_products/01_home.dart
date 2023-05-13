@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gronik/config/api_urls.dart';
-import 'package:gronik/controller/categories/categories_controller.dart';
+import 'package:gronik/constants/app_constants.dart';
 import 'package:gronik/controller/dashboard/dashboard_controller.dart';
-import 'package:gronik/views/pages/03_home_&_products/03_categories_details.dart';
+import 'package:gronik/routes/routes.dart';
 import 'package:gronik/views/widgets/categories_tile.dart';
+import 'package:gronik/views/widgets/shimmers/shimmer_banner_list.dart';
+import 'package:gronik/views/widgets/shimmers/shimmer_home_product_list.dart';
 import '../../../constants/app_images.dart';
 import '../../../constants/app_sizes.dart';
 
+import '../../widgets/custome_image_view.dart';
+import '../../widgets/shimmers/category_list_shimmer.dart';
 import '02_categories.dart';
-import '05_search.dart';
 import '../07_profile/01_profile.dart';
 import '../../../constants/app_colors.dart';
 import '../../theme/text_theme.dart';
@@ -20,9 +22,6 @@ class HomeContent extends StatefulWidget {
 }
 
 class _HomeContentState extends State<HomeContent> {
-  DashboardController dashboardController = Get.put(DashboardController());
-  CategoriesController categoriesController = Get.put(CategoriesController());
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,7 +78,7 @@ class _HomeContentState extends State<HomeContent> {
                 // ),
                 InkWell(
                   onTap: () {
-                    Get.to(() => SearchScreen());
+                    Get.toNamed(Routes.search);
                   },
                   child: Container(
                     padding: EdgeInsets.all(20),
@@ -154,17 +153,24 @@ class _HomeContentState extends State<HomeContent> {
                             /* <---- List Of Categories ----> */
                             Container(
                               height: 130,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return CategoriesTile(
-                                    category: controller.categories[index],
-                                    onTap: () {
-                                      Get.to(() => CategoriesDetails());
-                                    },
-                                  );
-                                },
-                                itemCount: controller.categories.length,
+                              child: ShimmerCategoryList(
+                                isLoading: controller.loading.value,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return CategoriesTile(
+                                      category: controller.categories[index],
+                                      onTap: () {
+                                        Get.toNamed(
+                                          Routes.categoryDetails,
+                                          arguments:
+                                              controller.categories[index],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  itemCount: controller.categories.length,
+                                ),
                               ),
                             )
                           ],
@@ -192,24 +198,29 @@ class _HomeContentState extends State<HomeContent> {
                       Container(
                         padding: EdgeInsets.only(left: 10),
                         height: Get.height * 0.18,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: controller.banners.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.75,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  child: Image.network(
-                                    "${imageBaseUrl}banner/${controller.banners[index].image}",
-                                    fit: BoxFit.cover,
+                        child: ShimmerBinnerList(
+                          isLoading: controller.loading.value,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: controller.banners.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.75,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: CustomImageView(
+                                      "${controller.banners[index].image}",
+                                      type: AppConstants.BANNER_IMG,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
                       /* <---- Popular Deals ----> */
@@ -257,23 +268,32 @@ class _HomeContentState extends State<HomeContent> {
                             // ),
                             Container(
                               height: 120,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: controller.products.length,
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 8),
-                                    height: 120,
-                                    width: 120,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image.network(
-                                        "${imageBaseUrl}product/${controller.products[index].image?[0]}",
-                                        fit: BoxFit.cover,
+                              child: ShimmerHomeProductList(
+                                isLoading: controller.loading.value,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: controller.products.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 8),
+                                      height: 120,
+                                      width: 120,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        // child: Image.network(
+                                        //   "${URLs.imageBaseUrl}product/${controller.products[index].image?[0]}",
+                                        //   fit: BoxFit.cover,
+                                        // ),
+                                        child: CustomImageView(
+                                          "${controller.products[index].image?[0]}",
+                                          type: AppConstants.PRODUCT_IMG,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                             AppSizes.hGap40,

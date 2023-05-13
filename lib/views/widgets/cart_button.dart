@@ -22,11 +22,11 @@ class _CartButtonState extends State<CartButton>
   late AnimationController animationController;
 
   // Cart Animation
-  _checkCartAnimation() {
-    Get.find<CartController>().cartItemsLength.listen((onData) {
-      animationController.forward();
-    });
-  }
+  // _checkCartAnimation() {
+  //   Get.find<CartController>().cartItems.length.listen((onData) {
+  //     animationController.forward();
+  //   });
+  // }
 
   late Animation<double> normalMargin;
 
@@ -35,7 +35,7 @@ class _CartButtonState extends State<CartButton>
     super.initState();
     animationController = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
-    _checkCartAnimation();
+    // _checkCartAnimation();
     normalMargin = Tween(begin: 10.00, end: 25.00)
         .chain(CurveTween(curve: Curves.elasticIn))
         .animate(animationController)
@@ -113,7 +113,7 @@ class _CartButtonState extends State<CartButton>
                     ),
                   ),
                 ),
-        ),
+        )
       ],
     );
   }

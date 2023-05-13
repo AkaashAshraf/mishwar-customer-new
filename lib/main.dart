@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gronik/routes/binding/initial_binding.dart';
 import 'package:gronik/routes/pages.dart';
+import 'package:gronik/routes/routes.dart';
 import 'package:gronik/utils/app_storage.dart';
 import 'package:gronik/utils/get_di.dart';
 import 'package:gronik/utils/message.dart';
-import 'controller/cart/cart_controller.dart';
-import 'controller/navigation/navigation_controller.dart';
 import 'utils/ui_helper.dart';
-import 'views/root_gronik.dart';
 import 'views/theme/theme.dart';
 import 'package:get/get.dart';
 
@@ -24,9 +23,6 @@ void main() async {
     locale: locale,
   ));
   AppUiHelper.autoRotateOff();
-  Get.put(NavigationController());
-
-  Get.put(CartController());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +39,8 @@ class MyApp extends StatelessWidget {
       theme: AppThemes.lightGronikTheme,
       locale: locale,
       translations: Messages(languages: languages),
-      home: GronikRoot(),
+      initialRoute: Routes.init,
+      initialBinding: InitialBinding(),
       getPages: Pages.getPages,
     );
   }

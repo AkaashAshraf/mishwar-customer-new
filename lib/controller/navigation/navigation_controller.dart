@@ -29,6 +29,7 @@ class NavigationController extends GetxController {
   /// Get Back To Previus content screen
   void getBackPrevScreen() {
     if (selectedMenu <= 1) {
+      Get.back();
     } else {
       selectedMenu = selectedMenu - 1;
       update();
@@ -42,7 +43,7 @@ class NavigationController extends GetxController {
     } else if (selectedMenu == 1) {
       return OrderPage();
     } else if (selectedMenu == 2) {
-      return CartScreen();
+      return CartScreen(fromBottom: true);
     } else if (selectedMenu == 3) {
       return OfferPage();
     } else if (selectedMenu == 4) {

@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:gronik/constants/app_constants.dart';
+import 'package:gronik/controller/product/product_detail_controller.dart';
+import 'package:gronik/model/product.dart';
+import 'package:gronik/views/widgets/custome_image_view.dart';
+import 'package:gronik/views/widgets/shimmers/shimmer_product_horizontal_list.dart';
 import '../../../constants/app_images.dart';
-import '../../../controller/cart/cart_controller.dart';
 import '../../../constants/app_sizes.dart';
+import '../../../controller/cart/cart_controller.dart';
 import '../../theme/custom_paint.dart';
-import '../../../constants/dummyData.dart';
 
-import '../../../modal/food.dart';
-import '../04_cart_&_checkout/01_cart.dart';
-import '03_categories_details.dart';
 import '../../../constants/app_colors.dart';
 import '../../theme/text_theme.dart';
+import '../04_cart_&_checkout/01_cart.dart';
+import '03_categories_details.dart';
 
 /* <---- The reason this is stateful widget is because we want to 
           demonstrate how you can implement custom tab bar with custom paint
  ----> */
 
 class ProductDetails extends StatefulWidget {
-  final Food food;
+  final Product food;
   /* <---- For discount page ----> */
   final bool discountON;
   const ProductDetails({Key? key, required this.food, this.discountON = false});
@@ -28,6 +32,14 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   bool detailsToggled = true;
+  late ProductDetailController ctr;
+  @override
+  void initState() {
+    ctr = ProductDetailController.to;
+    ctr.quantity.value = widget.food.capacity ?? 1;
+    ctr.getRelatedProducts(widget.food.id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +58,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     color: Colors.white,
                     width: Get.width,
                     height: Get.height * 0.4,
-                    child: Image.asset(
-                      '${widget.food.foodImage}',
+                    child: CustomImageView(
+                      '${widget.food.image?[0]}',
+                      type: AppConstants.PRODUCT_IMG,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -127,11 +140,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       ),
                                       AppSizes.hGap10,
                                       /* <---- Weight ----> */
-                                      Text(
-                                        '\$${widget.food.foodWeight}',
-                                        style: TextStyle(
-                                            color: AppColors.NEUTRAL_50),
-                                      ),
+                                      //TODO chage it
+                                      // Text(
+                                      //   '\$${widget.food.foodWeight}',
+                                      //   style: TextStyle(
+                                      //       color: AppColors.NEUTRAL_50),
+                                      // ),
                                       /* <---- Details ----> */
                                       AppSizes.hGap15,
                                       Row(
@@ -139,10 +153,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           /* <---- Price ----> */
-                                          Text(
-                                            '\$${widget.food.foodPrice}',
-                                            style: AppText.paragraph1,
-                                          ),
+
+                                          Obx(() => Text(
+                                                '\$${widget.food.price == null ? 0 : widget.food.price! * ctr.quantity.value}',
+                                                style: AppText.paragraph1,
+                                              )),
                                           /* <---- Calories ----> */
                                           Text(
                                             '14 ' + 'calories'.tr,
@@ -174,34 +189,43 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            child: Icon(
-                                              Icons.add,
-                                              color: Colors.white,
+                                          GestureDetector(
+                                            onTap: () => ctr.increaseQuantity(),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.PRIMARY_COLOR,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: Icon(
+                                                Icons.add,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                           AppSizes.wGap10,
-                                          Text(
-                                            '1 ' + 'kg'.tr,
-                                            style: AppText.paragraph1.copyWith(
-                                                fontSize: 14,
-                                                color: AppColors.APP_BLACK),
-                                          ),
+                                          Obx(() => Text(
+                                                '${ctr.quantity} ' +
+                                                    '${widget.food.unit}'.tr,
+                                                style: AppText.paragraph1
+                                                    .copyWith(
+                                                        fontSize: 14,
+                                                        color: AppColors
+                                                            .APP_BLACK),
+                                              )),
                                           AppSizes.wGap10,
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: AppColors.PRIMARY_COLOR,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            child: Icon(
-                                              Icons.remove,
-                                              color: Colors.white,
+                                          GestureDetector(
+                                            onTap: () => ctr.decreaseQuantity(),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.PRIMARY_COLOR,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: Icon(
+                                                Icons.remove,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -271,7 +295,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       ),
                                       detailsToggled
                                           /* <---- Details ----> */
-                                          ? _DetailsCard()
+                                          ? _DetailsCard(
+                                              description:
+                                                  widget.food.description ?? '',
+                                            )
                                           :
                                           /* <---- Reviews ----> */
                                           _ReviewsCard(),
@@ -281,40 +308,65 @@ class _ProductDetailsState extends State<ProductDetails> {
 
                                 /* <---- Similar Products ----> */
 
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 16),
-                                  padding: EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(24),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'similar_products'.tr,
-                                        style: AppText.heading2.copyWith(
-                                            color: AppColors.NEUTRAL_800),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: SingleProduct(
-                                              food: DummyData.foods[0],
+                                Obx(() => !ctr.relatedLoading.value &&
+                                        ctr.relatedProducts.isEmpty
+                                    ? SizedBox.shrink()
+                                    : Container(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 16),
+                                        padding: EdgeInsets.all(16),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'similar_products'.tr,
+                                              style: AppText.heading2.copyWith(
+                                                  color: AppColors.NEUTRAL_800),
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: SingleProduct(
-                                              food: DummyData.foods[1],
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
+                                            // Row(
+                                            //   children: [
+                                            //     Expanded(
+                                            //       child: SingleProduct(
+                                            //         food: widget.food,
+                                            //       ),
+                                            //     ),
+                                            //     Expanded(
+                                            //       child: SingleProduct(
+                                            //         food: widget.food,
+                                            //       ),
+                                            //     )
+                                            //   ],
+                                            // )
+                                            SizedBox(
+                                              height: 270,
+                                              child:
+                                                  ShimmerProductHorizontalList(
+                                                isLoading:
+                                                    ctr.relatedLoading.value,
+                                                child: ListView.builder(
+                                                  itemCount: ctr
+                                                      .relatedProducts.length,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return SingleProduct(
+                                                      food: ctr.relatedProducts[
+                                                          index],
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )),
 
                                 /* <---- Bottom Bar ----> */
 
@@ -333,17 +385,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
-                                        '\$${widget.food.foodPrice}',
+                                        '\$${widget.food.price}',
                                         style: AppText.heading2,
                                       ),
                                       /* <---- Add to cart button ----> */
                                       InkWell(
                                         onTap: () {
-                                          DummyData.cartItems.add(widget.food);
-                                          Get.find<CartController>()
-                                              .cartItemsLength
-                                              .value++;
-                                          Get.offAll(CartScreen());
+                                          //TODO must change
+                                          CartController.to.addItem(
+                                              widget.food, ctr.quantity.value);
+                                          Get.to(CartScreen(fromBottom: false));
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(16),
@@ -517,8 +568,10 @@ class _ProductReview extends StatelessWidget {
 }
 
 class _DetailsCard extends StatelessWidget {
+  final String description;
   const _DetailsCard({
     Key? key,
+    required this.description,
   }) : super(key: key);
 
   @override
@@ -535,25 +588,32 @@ class _DetailsCard extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Text(
-                      '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.''',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    AppSizes.hGap10,
-                    Text(
-                      '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.''',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    AppSizes.hGap10,
-                    Text(
-                      '''Lorem ipsum dolor sit amet, consectetur adipiscing elit,''',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
+                  child: Html(
+                data: """$description""",
+                style: {
+                  "body": Style(color: Colors.white),
+                },
+                // style: {'<>', Style},
+              )
+                  // child: Column(
+                  //   children: [
+                  //     // Text(
+                  //     //   '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.''',
+                  //     //   style: TextStyle(color: Colors.white),
+                  //     // ),
+                  //     // AppSizes.hGap10,
+                  //     // Text(
+                  //     //   '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.''',
+                  //     //   style: TextStyle(color: Colors.white),
+                  //     // ),
+                  //     // AppSizes.hGap10,
+                  //     // Text(
+                  //     //   '''Lorem ipsum dolor sit amet, consectetur adipiscing elit,''',
+                  //     //   style: TextStyle(color: Colors.white),
+                  //     // ),
+                  //   ],
+                  // ),
+                  ),
             ),
           ),
         ),

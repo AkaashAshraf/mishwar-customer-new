@@ -1,28 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gronik/constants/app_constants.dart';
+import 'package:gronik/controller/categories/category_detail_controller.dart';
+import 'package:gronik/model/category.dart';
+import 'package:gronik/model/product.dart';
+import 'package:gronik/routes/routes.dart';
+import 'package:gronik/views/widgets/custome_image_view.dart';
+import 'package:gronik/views/widgets/shimmers/shimmer_product_grid_view.dart';
 import '../../../controller/cart/cart_controller.dart';
 import '../../../constants/app_sizes.dart';
 import '../../widgets/gronik_layout.dart';
-import '../../../constants/dummyData.dart';
 
-import '../../../modal/food.dart';
 import '00_entrypoint.dart';
-import '04_product_details.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../../constants/app_colors.dart';
 import '../../theme/text_theme.dart';
 
 class CategoriesDetails extends StatefulWidget {
+  final Category category;
+
+  const CategoriesDetails({Key? key, required this.category}) : super(key: key);
   @override
   State<CategoriesDetails> createState() => _CategoriesDetailsState();
 }
 
 class _CategoriesDetailsState extends State<CategoriesDetails> {
+  late CategoryDetailController ctr;
+  @override
+  void initState() {
+    ctr = CategoryDetailController.to;
+    ctr.fetchProductByCategory(widget.category.id);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: 'Fruits',
+        appBarTitle: widget.category.name ?? '',
         content: Expanded(
           child: Container(
             margin: EdgeInsets.all(16),
@@ -33,23 +48,27 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
             child: Column(
               children: [
                 Expanded(
-                  child: StaggeredGridView.countBuilder(
-                    crossAxisCount: 4,
-                    itemBuilder: (context, index) {
-                      return SingleProduct(
-                        onTap: () {
-                          Get.to(() => ProductDetails(
-                                food: DummyData.foods[index],
-                              ));
-                        },
-                        food: DummyData.foods[index],
-                        foodIndex: index,
-                      );
-                    },
-                    staggeredTileBuilder: (ti) => StaggeredTile.fit(2),
-                    itemCount: DummyData.foods.length,
+                    child: Obx(
+                  () => ShimmerProductGridView(
+                    isLoading: ctr.loading,
+                    list: ctr.products,
+                    child: StaggeredGridView.countBuilder(
+                      crossAxisCount: 4,
+                      itemBuilder: (context, index) {
+                        return SingleProduct(
+                          onTap: () {
+                            Get.toNamed(Routes.prodcutDetails,
+                                arguments: ctr.products[index]);
+                          },
+                          food: ctr.products[index],
+                          foodIndex: index,
+                        );
+                      },
+                      staggeredTileBuilder: (ti) => StaggeredTile.fit(2),
+                      itemCount: ctr.products.length,
+                    ),
                   ),
-                ),
+                )),
                 AppSizes.hGap40,
                 AppSizes.hGap40,
               ],
@@ -70,7 +89,7 @@ class SingleProduct extends StatefulWidget {
     this.foodIndex,
   });
 
-  final Food food;
+  final Product food;
   final void Function()? onTap;
   final int? foodIndex;
 
@@ -105,8 +124,9 @@ class _SingleProductState extends State<SingleProduct>
               children: [
                 Container(
                   margin: EdgeInsets.all(10),
-                  child: Image.asset(
-                    '${widget.food.foodImage}',
+                  child: CustomImageView(
+                    '${widget.food.image?[0]}',
+                    type: AppConstants.PRODUCT_IMG,
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -121,7 +141,7 @@ class _SingleProductState extends State<SingleProduct>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${widget.food.foodName}',
+                              '${widget.food.name} (${widget.food.unit?.toUpperCase()})',
                               style: AppText.paragraph1.copyWith(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
@@ -131,13 +151,13 @@ class _SingleProductState extends State<SingleProduct>
                             ),
                             AppSizes.hGap5,
                             Text(
-                              '\$${widget.food.foodWeight}',
+                              '\$${widget.food.price} - ${widget.food.capacity}${widget.food.unit?.toUpperCase()}',
                               style: AppText.paragraph1
                                   .copyWith(color: AppColors.NEUTRAL_50),
                             ),
                             AppSizes.hGap10,
                             Text(
-                              '\$${widget.food.foodPrice}',
+                              '\$${widget.food.price}',
                               style: AppText.paragraph1.copyWith(
                                   color: AppColors.PRIMARY_COLOR,
                                   fontWeight: FontWeight.w600),
@@ -217,10 +237,11 @@ class _SingleProductState extends State<SingleProduct>
                           },
                           // Add to cart
                           onTap: () {
-                            DummyData.cartItems.add(
-                              DummyData.foods[widget.foodIndex!],
-                            );
-                            Get.find<CartController>().cartItemsLength.value++;
+                            CartController.to.addItem(widget.food, quantity);
+                            //  DummyData.cartItems.add(
+                            //   DummyData.foods[widget.foodIndex!],
+                            // );
+                            // Get.find<CartController>().cartItemsLength.value++;
                           },
                           child: Icon(
                             Icons.add,

@@ -1,3 +1,5 @@
+import 'package:country_code_picker/country_code_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gronik/views/pages/02_auth/06_auth_controller.dart';
@@ -47,21 +49,37 @@ class LoginScreen extends StatelessWidget {
                       key: ctr.lFormKey,
                       child: Column(
                         children: [
-                          GronikTextField(
-                            labelText: 'email_phone_number'.tr,
-                            hintText: 'enter_email_or_phone_number'.tr,
-                            textInputType: TextInputType.emailAddress,
-                            textEditingController: ctr.lEmailController,
-                            validator: Validation.validateEmail,
-                          ),
                           AppSizes.hGap20,
                           GronikTextField(
-                            labelText: 'password'.tr,
-                            hintText: 'enter_a_password'.tr,
-                            isItPassWordBox: true,
-                            textEditingController: ctr.lPasswordController,
-                            validator: Validation.validatePassword,
+                            labelText: 'Phone Number'.tr,
+                            hintText: 'Enter your Phone Number'.tr,
+                            textInputType: TextInputType.phone,
+                            textEditingController: ctr.lPhoneNumberCtr,
+                            validator: Validation.validateMobile,
+                            prefixIcon: CountryCodePicker(
+                              onChanged: (code) =>
+                                  ctr.cuntryCode = code.dialCode ?? '+968',
+                              // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                              initialSelection: 'OM',
+                              favorite: ['+968', 'OM'],
+                              showFlag:
+                                  false, // optional. Shows only country name and flag
+                              showCountryOnly: false,
+                              showFlagDialog: true,
+                              // optional. Shows only country name and flag when popup is closed.
+                              showOnlyCountryWhenClosed: false,
+                              // optional. aligns the flag and the Text left
+                              alignLeft: false,
+                            ),
                           ),
+                          AppSizes.hGap20,
+                          // GronikTextField(
+                          //   labelText: 'password'.tr,
+                          //   hintText: 'enter_a_password'.tr,
+                          //   isItPassWordBox: true,
+                          //   textEditingController: ctr.lPasswordController,
+                          //   validator: Validation.validatePassword,
+                          // ),
                           AppSizes.hGap15,
                           /* <---- Remember me ----> */
                           Row(
@@ -89,14 +107,14 @@ class LoginScreen extends StatelessWidget {
                               //     ),
                               //   ],
                               // ),
-                              InkWell(
-                                onTap: ctr.onForgotPass,
-                                child: Text(
-                                  'forgot_password'.tr,
-                                  style: AppText.paragraph1.copyWith(
-                                      color: AppColors.APP_RED, fontSize: 14),
-                                ),
-                              )
+                              // InkWell(
+                              //   onTap: ctr.onForgotPass,
+                              //   child: Text(
+                              //     'forgot_password'.tr,
+                              //     style: AppText.paragraph1.copyWith(
+                              //         color: AppColors.APP_RED, fontSize: 14),
+                              //   ),
+                              // )
                             ],
                           )
                         ],
@@ -133,10 +151,15 @@ class LoginScreen extends StatelessWidget {
                   color: AppColors.PRIMARY_COLOR,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text(
-                  'sign_in'.tr,
-                  style: AppText.paragraph1.copyWith(color: Colors.white),
-                  textAlign: TextAlign.center,
+                child: Obx(
+                  () => ctr.isLoading
+                      ? CupertinoActivityIndicator()
+                      : Text(
+                          'sign_in'.tr,
+                          style:
+                              AppText.paragraph1.copyWith(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
                 ),
               ),
             ),

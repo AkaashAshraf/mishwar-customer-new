@@ -25,7 +25,7 @@ class GronikTextField extends StatelessWidget {
   final TextInputType? textInputType;
   final bool isItPassWordBox;
   final TextEditingController? textEditingController;
-  final Icon? prefixIcon;
+  final Widget? prefixIcon;
   final Icon? suffxIcon;
   final void Function()? onTap;
   final bool marginLabelDisable;

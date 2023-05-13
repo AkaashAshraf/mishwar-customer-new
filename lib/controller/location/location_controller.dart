@@ -14,7 +14,7 @@ import '../../constants/app_constants.dart';
 import '../../model/address_model.dart';
 import '../../model/response_model.dart';
 import '../../repositories/location_repo.dart';
-import '../../views/pages/03_home_&_products/00_entrypoint.dart';
+import '../../routes/routes.dart';
 
 class LocationController extends GetxController implements GetxService {
   @override
@@ -173,7 +173,6 @@ class LocationController extends GetxController implements GetxService {
       _responseModel = ResponseModel(true, response.body['zone_id'].toString());
       print(_responseModel);
       // box.write('zoneid', response.body['zone_id'].toString());
-
     } else {
       _inZone = false;
       _responseModel = ResponseModel(false, response.statusText!);
@@ -416,12 +415,12 @@ class LocationController extends GetxController implements GetxService {
     // Get.find<RestaurantController>().getLatestRestaurantList(true);
     // Get.find<RestaurantController>().getRestaurantList('1', true);
     if (fromSignUp) {
-      Get.to(() => AppEntryPoint);
+      Get.toNamed(Routes.home);
     } else {
       if (canRoute) {
         Get.offAllNamed(route);
       } else {
-        Get.to(() => AppEntryPoint);
+        Get.toNamed(Routes.home);
       }
     }
   }

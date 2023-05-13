@@ -86,5 +86,13 @@
     "password_is_too_short": "Password is too short",
     "email_is_required": "Email is Required",
     "invalid_email": "Invalid Email",
-    "required_field": "Required Field"
+    "required_field": "Required Field",
+    "we_have_sent_code_to_your_number": "We have sent a code to your number",
+    "didn_t_receive_code": "Didn't receive a code",
+    "details": "Details",
+    "similar_products": "Similar Products",
+    "add_to_cart": "Add to Cart",
+    "cart": "Cart",
+    "checkout": "Checkout",
+    "total": "Total"
 }

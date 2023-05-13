@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gronik/config/api_urls.dart';
+import 'package:gronik/constants/app_constants.dart';
 import 'package:gronik/model/category.dart';
+import 'package:gronik/views/widgets/custome_image_view.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_sizes.dart';
 import '../theme/text_theme.dart';
@@ -37,8 +38,9 @@ class CategoriesTile extends StatelessWidget {
               ),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    "${imageBaseUrl}category/${category.image}",
+                  child: CustomImageView(
+                    "${category.image}",
+                    type: AppConstants.CATEGORY_IMG,
                     fit: BoxFit.cover,
                   )),
             ),

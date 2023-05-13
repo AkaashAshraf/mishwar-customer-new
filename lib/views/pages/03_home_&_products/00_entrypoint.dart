@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gronik/views/widgets/menu_item.dart';
 import '../../../constants/app_images.dart';
+import '../../../routes/routes.dart';
 import '../../theme/custom_paint.dart';
 import '../../widgets/cart_button.dart';
 import '../../../controller/navigation/navigation_controller.dart';
@@ -94,7 +95,7 @@ class GronikBottomBar extends StatelessWidget {
                               // Main Home
                               controller.updateMenu(0);
                               if (Get.currentRoute != '/AppEntryPoint') {
-                                Get.to(() => AppEntryPoint());
+                                Get.toNamed(Routes.home);
                               }
                             },
                           ),
@@ -106,7 +107,7 @@ class GronikBottomBar extends StatelessWidget {
                               // Go to order page
                               controller.updateMenu(1);
                               if (Get.currentRoute != '/AppEntryPoint') {
-                                Get.to(() => AppEntryPoint());
+                                Get.toNamed(Routes.home);
                               }
                             },
                           ),
@@ -127,7 +128,7 @@ class GronikBottomBar extends StatelessWidget {
                               // Go to offer page
                               controller.updateMenu(3);
                               if (Get.currentRoute != '/AppEntryPoint') {
-                                Get.to(() => AppEntryPoint());
+                                Get.toNamed(Routes.home);
                               }
                             },
                           ),
@@ -139,7 +140,7 @@ class GronikBottomBar extends StatelessWidget {
                               // Go to more page
                               controller.updateMenu(4);
                               if (Get.currentRoute != '/AppEntryPoint') {
-                                Get.to(() => AppEntryPoint());
+                                Get.toNamed(Routes.home);
                               }
                             },
                           ),
@@ -158,7 +159,7 @@ class GronikBottomBar extends StatelessWidget {
             onTap: () {
               Get.find<NavigationController>().updateMenu(2);
               if (Get.currentRoute != '/AppEntryPoint') {
-                Get.to(() => AppEntryPoint());
+                Get.toNamed(Routes.home);
               }
             },
           ),
