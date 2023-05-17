@@ -12,7 +12,7 @@ class ContactScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: 'Contact Us',
+        appBarTitle: 'contact_us'.tr,
         /* <---- Content ----> */
         content: Expanded(
           child: Container(
@@ -52,7 +52,7 @@ class ContactScreen extends StatelessWidget {
                     ],
                   ),
                   title: Text(
-                    'Gronik',
+                    'app_name'.tr,
                     style: AppText.paragraph1.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.PRIMARY_COLOR,
@@ -62,7 +62,7 @@ class ContactScreen extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Assist by: ',
+                          text: 'assist_by'.tr + ': ',
                           style: AppText.paragraph1.copyWith(
                             color: Colors.black.withOpacity(0.6),
                           ),
@@ -86,7 +86,8 @@ class ContactScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.all(16),
                           child: Text(
-                            'Hi, can we help you? We will always help you to find your product 😊',
+                            'hi_can_we_help_you_we_will_always_help_you_to_find_your_product_😊'
+                                .tr,
                             style: AppText.paragraph1.copyWith(
                               color: AppColors.APP_BLACK,
                             ),
@@ -97,23 +98,37 @@ class ContactScreen extends StatelessWidget {
                           children: [
                             /* <---- User Message ----> */
                             UserMessageWidget(
-                              userMessage:
-                                  'Hello Gronik, I want to my order status #GR4567568 from your side.',
+                              userMessage: 'hello'.tr +
+                                  ' ' +
+                                  'app_name'.tr +
+                                  ', i_want_to_my_order_status_gr_4567568_from_your_side'
+                                      .tr,
                             ),
                             /* <---- Assist message ----> */
                             AssistMessageWidget(
-                              assistMessage:
-                                  'Hello Mahmud, Nice to meet you here. You can check here: gr.nik/gr568',
+                              assistMessage: 'hello'.tr +
+                                  ' Mahmud, ' +
+                                  'nice_to_meet_you_here_you_can_check_here'
+                                      .tr +
+                                  ': gr.nik/gr568',
                             ),
                             /* <---- User Message ----> */
                             UserMessageWidget(
-                              userMessage:
-                                  'Hello Gronik, I want to my order status #GR4567568 from your side.',
+                              userMessage: 'hello'.tr +
+                                  ' ' +
+                                  'app_name'.tr +
+                                  ', ' +
+                                  'i_want_to_my_order_status' +
+                                  ' #GR4567568 ' +
+                                  'from_your_side'.tr,
                             ),
                             /* <---- Assist message ----> */
                             AssistMessageWidget(
-                              assistMessage:
-                                  'Hello Mahmud, Nice to meet you here. You can check here: gr.nik/gr568',
+                              assistMessage: 'hello'.tr +
+                                  ' Mahmud, ' +
+                                  'nice_to_meet_you_here_you_can_check_here'
+                                      .tr +
+                                  ': gr.nik/gr568',
                             ),
                           ],
                         ),
@@ -131,7 +146,7 @@ class ContactScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: GronikTextField(
-                          hintText: 'Type your message....',
+                          hintText: 'type_your_message'.tr,
                           labelText: '',
                           textEditingController: null,
                           marginLabelDisable: true,

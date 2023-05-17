@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../constants/app_colors.dart';
 import '../../../constants/app_sizes.dart';
 import '../../widgets/gronik_layout.dart';
@@ -19,42 +20,51 @@ class FaqScreen extends StatelessWidget {
                   AppSizes.hGap10,
                   QuestionAndAnswer(
                     question:
-                        'How do I order grocery from this mobile application?',
+                        'how_do_i_order_grocery_from_this_mobile_application'
+                            .tr,
                     answer:
-                        'You can pay with a credit card or via net banking (if you’re in United States). We will renew your subscription automatically at the end of every billing cycle.',
+                        'you_can_pay_with_a_credit_card_or_via_net_banking_if_you_re_in_united_states_we_will_renew_your_subscription_automatically_at_the_end_of_every_billing_cycle'
+                            .tr,
                   ),
                   QuestionAndAnswer(
-                    question: 'Are the prices different than at the shop?',
+                    question: 'are_the_prices_different_than_at_the_shop'.tr,
                     answer:
-                        'You can pay with a credit card or via net banking (if you’re in United States). We will renew your subscription automatically at the end of every billing cycle.',
-                  ),
-                  QuestionAndAnswer(
-                    question: 'What if the restaurant has changed its prices?',
-                    answer:
-                        'You can pay with a credit card or via net banking (if you’re in United States). We will renew your subscription automatically at the end of every billing cycle.',
-                  ),
-                  QuestionAndAnswer(
-                    question: 'When are you getting more shop as partners?',
-                    answer:
-                        'You can pay with a credit card or via net banking (if you’re in United States). We will renew your subscription automatically at the end of every billing cycle.',
+                        'you_can_pay_with_a_credit_card_or_via_net_banking_if_you_re_in_united_states_we_will_renew_your_subscription_automatically_at_the_end_of_every_billing_cycle'
+                            .tr,
                   ),
                   QuestionAndAnswer(
                     question:
-                        'How can I put special requests on my online order?',
+                        'what_if_the_restaurant_has_changed_its_prices'.tr,
                     answer:
-                        'You can pay with a credit card or via net banking (if you’re in United States). We will renew your subscription automatically at the end of every billing cycle.',
+                        'you_can_pay_with_a_credit_card_or_via_net_banking_if_you_re_in_united_states_we_will_renew_your_subscription_automatically_at_the_end_of_every_billing_cycle'
+                            .tr,
+                  ),
+                  QuestionAndAnswer(
+                    question: 'when_are_you_getting_more_shop_as_partners'.tr,
+                    answer:
+                        'you_can_pay_with_a_credit_card_or_via_net_banking_if_you_re_in_united_states_we_will_renew_your_subscription_automatically_at_the_end_of_every_billing_cycle'
+                            .tr,
                   ),
                   QuestionAndAnswer(
                     question:
-                        'Who do I call if there is a mistake with my order?',
+                        'how_can_i_put_special_requests_on_my_online_order'.tr,
                     answer:
-                        'You can pay with a credit card or via net banking (if you’re in United States). We will renew your subscription automatically at the end of every billing cycle.',
+                        'you_can_pay_with_a_credit_card_or_via_net_banking_if_you_re_in_united_states_we_will_renew_your_subscription_automatically_at_the_end_of_every_billing_cycle'
+                            .tr,
                   ),
                   QuestionAndAnswer(
                     question:
-                        'Who do I call if there is a mistake with my order?',
+                        'who_do_i_call_if_there_is_a_mistake_with_my_order'.tr,
                     answer:
-                        'You can pay with a credit card or via net banking (if you’re in United States). We will renew your subscription automatically at the end of every billing cycle.',
+                        'you_can_pay_with_a_credit_card_or_via_net_banking_if_you_re_in_united_states_we_will_renew_your_subscription_automatically_at_the_end_of_every_billing_cycle'
+                            .tr,
+                  ),
+                  QuestionAndAnswer(
+                    question:
+                        'who_do_i_call_if_there_is_a_mistake_with_my_order'.tr,
+                    answer:
+                        'you_can_pay_with_a_credit_card_or_via_net_banking_if_you_re_in_united_states_we_will_renew_your_subscription_automatically_at_the_end_of_every_billing_cycle'
+                            .tr,
                   ),
                 ],
               ),

@@ -10,7 +10,7 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: 'Notifications',
+        appBarTitle: 'notifications'.tr,
         /* <---- Content ----> */
         content: Expanded(
           child: Container(
@@ -33,20 +33,23 @@ class NotificationScreen extends StatelessWidget {
                     children: [
                       /* <---- HeadLine ----> */
                       Text(
-                        'Today',
+                        'today'.tr,
                         style: AppText.paragraph1
                             .copyWith(color: AppColors.NEUTRAL_50),
                       ),
                       AppSizes.hGap10,
                       // Single Notification
                       SingleNotificationTile(
-                        description:
-                            'You order #2034784 is arrived Railstation by Leo Hunter',
+                        description: 'you_order'.tr +
+                            ' #2034784 ' +
+                            'is_arrived_railstation_by'.tr +
+                            ' Leo Hunter'.tr,
                         time: '02:05 PM',
                       ),
                       SingleNotificationTile(
-                        description:
-                            'You received a payment of \$55.00 from Keith Cox',
+                        description: 'you_received_a_payment_of'.tr +
+                            ' \$55.00 ' +
+                            'from Keith Cox'.tr,
                         time: '10:05 AM',
                       ),
                     ],
@@ -59,15 +62,17 @@ class NotificationScreen extends StatelessWidget {
                     children: [
                       /* <---- HeadLine ----> */
                       Text(
-                        'Yesterday',
+                        'yesterday',
                         style: AppText.paragraph1
                             .copyWith(color: AppColors.NEUTRAL_50),
                       ),
                       AppSizes.hGap10,
                       // Single Notification
                       SingleNotificationTile(
-                        description:
-                            'You order #2034784 is arrived Railstation by Leo Hunter',
+                        description: 'you_order'.tr +
+                            ' #2034784 ' +
+                            'is_arrived_railstation_by'.tr +
+                            ' Leo Hunter',
                         time: '02:05 PM',
                       ),
                       SingleNotificationTile(

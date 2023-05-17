@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // ini();
     return GetMaterialApp(
-      title: 'Meshwar',
+      title: 'app_name'.tr,
       theme: AppThemes.lightGronikTheme,
       locale: locale,
       translations: Messages(languages: languages),

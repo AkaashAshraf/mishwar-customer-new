@@ -12,7 +12,7 @@ class ReferScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: 'Refer Friend',
+        appBarTitle: 'Refer Friend'.tr,
         /* <---- Content ----> */
         content: Expanded(
           child: Container(
@@ -28,13 +28,14 @@ class ReferScreen extends StatelessWidget {
                 AppSizes.hGap20,
                 /* <---- Head ----> */
                 Text(
-                  'Refer now',
+                  'refer_now'.tr,
                   style: AppText.heading1,
                 ),
                 AppSizes.hGap20,
                 /* <---- Desc ----> */
                 Text(
-                  'Refer your friends for purchase the grocery product for daily life.',
+                  'refer_your_friends_for_purchase_the_grocery_product_for_daily_life'
+                      .tr,
                   style:
                       AppText.paragraph1.copyWith(color: AppColors.APP_BLACK),
                   textAlign: TextAlign.center,
@@ -44,7 +45,7 @@ class ReferScreen extends StatelessWidget {
                 Stack(
                   children: [
                     TextField(
-                      decoration: InputDecoration(labelText: 'Mail Address'),
+                      decoration: InputDecoration(labelText: 'mail_address'.tr),
                     ),
                     Positioned(
                       right: 0,
@@ -52,7 +53,7 @@ class ReferScreen extends StatelessWidget {
                         width: Get.width * 0.2,
                         margin: EdgeInsets.only(top: 0),
                         child: AppButton(
-                          label: 'Send',
+                          label: 'send'.tr,
                           onTap: null,
                           height: 60,
                         ),
@@ -71,7 +72,7 @@ class ReferScreen extends StatelessWidget {
                       height: 1,
                     ),
                     Text(
-                      'Or Share via',
+                      'or_share_via'.tr,
                       style: AppText.paragraph1.copyWith(
                         color: AppColors.NEUTRAL_50,
                       ),

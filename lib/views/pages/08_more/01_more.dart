@@ -24,7 +24,7 @@ class MorePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'More',
+                  'more'.tr,
                   style: AppText.heading1.copyWith(color: Colors.white),
                 ),
               ],
@@ -62,7 +62,7 @@ class MorePage extends StatelessWidget {
                                 Icons.notifications,
                                 color: AppColors.NEUTRAL_50,
                               ),
-                              title: Text('Notification'),
+                              title: Text('notification'.tr),
                               trailing: CupertinoSwitch(
                                 activeColor: AppColors.PRIMARY_COLOR,
                                 onChanged: (value) {},
@@ -78,7 +78,7 @@ class MorePage extends StatelessWidget {
                               Icons.message,
                               color: AppColors.NEUTRAL_50,
                             ),
-                            title: Text('Contact Us'),
+                            title: Text('contact_us'.tr),
                           ),
                           Divider(),
                           /* <---- Privacy ----> */
@@ -88,7 +88,7 @@ class MorePage extends StatelessWidget {
                               Icons.lock,
                               color: AppColors.NEUTRAL_50,
                             ),
-                            title: Text('Privacy'),
+                            title: Text('privacy'.tr),
                           ),
                           Divider(),
                           /* <---- FAQs ----> */
@@ -100,7 +100,7 @@ class MorePage extends StatelessWidget {
                               Icons.help_outline,
                               color: AppColors.NEUTRAL_50,
                             ),
-                            title: Text('FAQs'),
+                            title: Text('FAQs'.tr),
                           ),
                           Divider(),
                           /* <---- Rate Us ----> */
@@ -110,7 +110,7 @@ class MorePage extends StatelessWidget {
                               Icons.star,
                               color: AppColors.NEUTRAL_50,
                             ),
-                            title: Text('Rate us'),
+                            title: Text('rate_us'.tr),
                           ),
                         ],
                       ),

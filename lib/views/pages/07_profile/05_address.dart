@@ -21,7 +21,7 @@ class _AddressListState extends State<AddressList> {
     return Scaffold(
       body: Container(
         child: GronikLayoutTwo(
-          appBarTitle: 'Delivery Address',
+          appBarTitle: 'delivery_address'.tr,
           /* <---- Content ----> */
           content: Expanded(
             child: Container(
@@ -46,7 +46,7 @@ class _AddressListState extends State<AddressList> {
                           topRight: Radius.circular(32),
                         )),
                     child: AppButton(
-                      label: 'Add address',
+                      label: 'add_address'.tr,
                       onTap: () async {
                         showSavedAddress = await Get.bottomSheet(
                               AddAddressSheet(),
@@ -148,7 +148,7 @@ class NoAddressAvailable extends StatelessWidget {
             ),
             AppSizes.hGap10,
             Text(
-              'No Address',
+              'no_address'.tr,
               style: AppText.heading1.copyWith(
                 color: AppColors.NEUTRAL_800,
                 fontSize: 32,
@@ -156,7 +156,7 @@ class NoAddressAvailable extends StatelessWidget {
             ),
             AppSizes.hGap10,
             Text(
-              'It looks like you do not have any delivery address yet.',
+              'It looks like you do not have any delivery address yet.'.tr,
               style: AppText.paragraph1.copyWith(
                 color: AppColors.APP_BLACK,
               ),
