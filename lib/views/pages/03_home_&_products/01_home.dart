@@ -40,7 +40,7 @@ class _HomeContentState extends State<HomeContent> {
                     Container(
                       width: Get.width * 0.7,
                       child: Text(
-                        "hey! 😊 let's search your grocery food".tr,
+                        "hey_let_s_search_your_grocery_food".tr,
                         style: AppText.paragraph1.copyWith(color: Colors.white),
                       ),
                     ),
@@ -237,7 +237,7 @@ class _HomeContentState extends State<HomeContent> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'popular_deals'.tr,
+                                  'latest_products'.tr,
                                   style: AppText.heading2,
                                 ),
                                 Text(
@@ -274,21 +274,27 @@ class _HomeContentState extends State<HomeContent> {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: controller.products.length,
                                   itemBuilder: (context, index) {
-                                    return Container(
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 8),
-                                      height: 120,
-                                      width: 120,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        // child: Image.network(
-                                        //   "${URLs.imageBaseUrl}product/${controller.products[index].image?[0]}",
-                                        //   fit: BoxFit.cover,
-                                        // ),
-                                        child: CustomImageView(
-                                          "${controller.products[index].image?[0]}",
-                                          type: AppConstants.PRODUCT_IMG,
+                                    return InkWell(
+                                      onTap: () => Get.toNamed(
+                                        Routes.prodcutDetails,
+                                        arguments: controller.products[index],
+                                      ),
+                                      child: Container(
+                                        margin:
+                                            EdgeInsets.symmetric(horizontal: 8),
+                                        height: 120,
+                                        width: 120,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          // child: Image.network(
+                                          //   "${URLs.imageBaseUrl}product/${controller.products[index].image?[0]}",
+                                          //   fit: BoxFit.cover,
+                                          // ),
+                                          child: CustomImageView(
+                                            "${controller.products[index].image?[0]}",
+                                            type: AppConstants.PRODUCT_IMG,
+                                          ),
                                         ),
                                       ),
                                     );

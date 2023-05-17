@@ -19,7 +19,7 @@ class CompletedOrderReview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: 'Completed Order',
+        appBarTitle: 'completed_order'.tr,
         /* <---- Content ----> */
         content: Expanded(
           child: Container(
@@ -39,37 +39,42 @@ class CompletedOrderReview extends StatelessWidget {
                       children: [
                         OrderStatus(
                           time: '9:30 AM',
-                          label: 'Order Placed',
-                          description:
-                              'Your order #212423 was placed for delivery.',
+                          label: 'order_placed'.tr,
+                          description: 'your_order'.tr +
+                              ' #212423 ' +
+                              'was_placed_for_delivery'.tr,
                           completed: true,
                         ),
                         OrderStatus(
                           time: '9:35 AM',
-                          label: 'Pending',
+                          label: 'pending'.tr,
                           description:
-                              'Your order is pending for confirmation. Will confirmed within 5 minutes.',
+                              'your_order_is_pending_for_confirmation_will_confirmed_within_5_minutes'
+                                  .tr,
                           completed: true,
                         ),
                         OrderStatus(
                           time: '9:45 AM',
-                          label: 'Confirmed',
+                          label: 'confirmed'.tr,
                           description:
-                              'Your order is confirmed. Will deliver soon within 20 minutes.',
+                              'your_order_is_confirmed_will_deliver_soon_within_20_minutes'
+                                  .tr,
                           completed: true,
                         ),
                         OrderStatus(
                           time: '1:30 PM',
-                          label: 'Processing',
+                          label: 'processing'.tr,
                           description:
-                              'Your product is processing to deliver you on time.',
+                              'your_product_is_processing_to_deliver_you_on_time'
+                                  .tr,
                           completed: true,
                         ),
                         OrderStatus(
                           time: '4:50 PM',
-                          label: 'Delivered',
+                          label: 'delivered'.tr,
                           description:
-                              'Product deliver to you and marked as deliverd by customer.',
+                              'product_deliver_to_you_and_marked_as_deliverd_by_customer'
+                                  .tr,
                           completed: true,
                           lastItem: true,
                         ),
@@ -89,7 +94,7 @@ class CompletedOrderReview extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Description',
+                          'description'.tr,
                           style: AppText.heading1
                               .copyWith(color: AppColors.NEUTRAL_800),
                         ),
@@ -133,7 +138,7 @@ class CompletedOrderReview extends StatelessWidget {
                                   ),
                                   AppSizes.hGap10,
                                   Text(
-                                    '\$${food.foodPrice} (Paid)',
+                                    '\$${food.foodPrice} (${'paid'.tr})',
                                     style: AppText.paragraph1.copyWith(
                                         color: AppColors.PRIMARY_COLOR,
                                         fontWeight: FontWeight.w600),
@@ -162,7 +167,7 @@ class CompletedOrderReview extends StatelessWidget {
                       ),
                     ),
                     child: AppButton(
-                      label: 'Leave a feedback',
+                      label: 'leave_a_feedback'.tr,
                       onTap: () {
                         Get.bottomSheet(
                           AddReviewSheet(),

@@ -9,7 +9,7 @@ class PasswordChangeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: 'Password',
+        appBarTitle: 'password'.tr,
         content: Expanded(
           child: Column(
             children: [
@@ -25,17 +25,17 @@ class PasswordChangeScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         GronikTextField(
-                          labelText: 'Old Password',
+                          labelText: 'old_password'.tr,
                           textEditingController: null,
                           isItPassWordBox: true,
                         ),
                         GronikTextField(
-                          labelText: 'New Password',
+                          labelText: 'new_password'.tr,
                           textEditingController: null,
                           isItPassWordBox: true,
                         ),
                         GronikTextField(
-                          labelText: 'Confirm Password',
+                          labelText: 'confirm_password'.tr,
                           textEditingController: null,
                           isItPassWordBox: true,
                         ),
@@ -54,7 +54,7 @@ class PasswordChangeScreen extends StatelessWidget {
                       topRight: Radius.circular(32),
                     )),
                 child: AppButton(
-                  label: 'Save Changes',
+                  label: 'save_changes'.tr,
                   onTap: null,
                 ),
               ),

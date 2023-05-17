@@ -83,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                               AppImages.ICON_PROFILE_USER,
                             ),
                           ),
-                          title: Text('Account information'),
+                          title: Text('account_information'.tr),
                         ),
                         Divider(),
                         /* <---- Password ----> */
@@ -99,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
                               AppImages.ICON_PROFILE_LOCK,
                             ),
                           ),
-                          title: Text('Password'),
+                          title: Text('password'.tr),
                         ),
                         Divider(),
                         /* <---- Payment Method ----> */
@@ -115,7 +115,7 @@ class ProfileScreen extends StatelessWidget {
                               AppImages.ICON_PROFILE_CARD,
                             ),
                           ),
-                          title: Text('Payment Method'),
+                          title: Text('payment_method'.tr),
                         ),
                         Divider(),
                         /* <---- Delivery Address ----> */
@@ -131,7 +131,7 @@ class ProfileScreen extends StatelessWidget {
                               AppImages.ICON_PROFILE_MARKER,
                             ),
                           ),
-                          title: Text('Delivery Address'),
+                          title: Text('delivery_address'.tr),
                         ),
                         Divider(),
                         /* <---- Refer ----> */
@@ -146,7 +146,7 @@ class ProfileScreen extends StatelessWidget {
                               child: Image.asset(
                                 AppImages.ICON_PROFILE_AT,
                               )),
-                          title: Text('Refer Friends'),
+                          title: Text('refer_friends'.tr),
                         ),
                       ],
                     ),
@@ -164,7 +164,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     child: AppButton(
-                      label: 'Logout',
+                      label: 'logout'.tr,
                       onTap: () {
                         Get.offAllNamed(Routes.login);
                       },

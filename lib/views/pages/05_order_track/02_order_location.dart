@@ -36,7 +36,7 @@ class OrderLocationScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Location Map',
+          'location_map'.tr,
           style: AppText.heading1
               .copyWith(color: AppColors.NEUTRAL_800, fontSize: 26),
         ),
@@ -110,7 +110,7 @@ class OrderLocationScreen extends StatelessWidget {
                                   ),
                                   AppSizes.hGap5,
                                   Text(
-                                    'Food Courier',
+                                    'food_courier'.tr,
                                     style: AppText.paragraph1.copyWith(
                                       color: Colors.white.withOpacity(0.8),
                                     ),
@@ -183,7 +183,7 @@ class OrderLocationScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Shipping Details',
+                            'shipping_details'.tr,
                             style: AppText.heading1
                                 .copyWith(color: AppColors.NEUTRAL_800),
                           ),
@@ -230,7 +230,7 @@ class OrderLocationScreen extends StatelessWidget {
                                     ),
                                     AppSizes.hGap10,
                                     Text(
-                                      '\$${food.foodPrice} (Paid)',
+                                      '\$${food.foodPrice} (${'paid'.tr})',
                                       style: AppText.paragraph1.copyWith(
                                           color: AppColors.PRIMARY_COLOR,
                                           fontWeight: FontWeight.w600),

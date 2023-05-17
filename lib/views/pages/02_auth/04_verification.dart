@@ -70,7 +70,7 @@ class VerificationScreen extends StatelessWidget {
                             Text('didn_t_receive_code'.tr),
                             AppSizes.wGap10,
                             Text(
-                              'resend',
+                              'resend'.tr,
                               style: AppText.paragraph1.copyWith(
                                   color: AppColors.PRIMARY_COLOR, fontSize: 14),
                             )

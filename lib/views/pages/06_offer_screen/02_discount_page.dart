@@ -14,7 +14,7 @@ class DiscountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: '30% Discount',
+        appBarTitle: '30% ' + 'discount'.tr,
         /* <---- Content ----> */
         content: Expanded(
           child: Container(
@@ -38,7 +38,7 @@ class DiscountPage extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'Filter by',
+                            'filter_by'.tr,
                             style: AppText.paragraph1.copyWith(
                               color: AppColors.NEUTRAL_50,
                             ),
@@ -50,11 +50,11 @@ class DiscountPage extends StatelessWidget {
                             items: [
                               DropdownMenuItem(
                                 value: 'low',
-                                child: Text('Lowest Price'),
+                                child: Text('lowest_price'.tr),
                               ),
                               DropdownMenuItem(
                                 value: 'high',
-                                child: Text('Highest Price'),
+                                child: Text('highest_price'.tr),
                               )
                             ],
                             onChanged: (value) {},
@@ -63,7 +63,7 @@ class DiscountPage extends StatelessWidget {
                       ),
                       /* <---- Total Results ----> */
                       Text(
-                        '345 Results',
+                        '345 ' + 'results'.tr,
                         style: AppText.paragraph1.copyWith(
                           color: AppColors.NEUTRAL_50,
                         ),

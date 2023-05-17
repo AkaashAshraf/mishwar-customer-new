@@ -50,7 +50,7 @@ class AuthController extends GetxController {
   onVerify() async {
     _isLoading.value = true;
     if (verificationCode == null || verificationCode == '') {
-      showErrorMessage('Please enter a verification code');
+      showErrorMessage('please_enter_a_verification_code'.tr);
       return;
     }
     final res =

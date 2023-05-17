@@ -9,7 +9,7 @@ class AccountInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: 'Account Information',
+        appBarTitle: 'account_information'.tr,
         content: Expanded(
           child: Column(
             children: [
@@ -25,20 +25,20 @@ class AccountInfoScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         GronikTextField(
-                          labelText: 'Name',
+                          labelText: 'name'.tr,
                           textEditingController: null,
                         ),
                         GronikTextField(
-                          labelText: 'Username',
+                          labelText: 'username'.tr,
                           textEditingController: null,
                         ),
                         GronikTextField(
-                          labelText: 'Email Address',
+                          labelText: 'email_address'.tr,
                           textEditingController: null,
                           textInputType: TextInputType.emailAddress,
                         ),
                         GronikTextField(
-                          labelText: 'Phone Number',
+                          labelText: 'phone_number'.tr,
                           textEditingController: null,
                           textInputType: TextInputType.phone,
                         ),
@@ -57,7 +57,7 @@ class AccountInfoScreen extends StatelessWidget {
                       topRight: Radius.circular(32),
                     )),
                 child: AppButton(
-                  label: 'Save Changes',
+                  label: 'save_changes'.tr,
                   onTap: null,
                 ),
               ),

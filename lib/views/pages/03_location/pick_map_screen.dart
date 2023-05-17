@@ -174,7 +174,7 @@ class _PickMapScreenState extends State<PickMapScreen> {
                                     longitude: locationController
                                         .pickPosition.longitude
                                         .toString(),
-                                    addressType: 'others',
+                                    addressType: 'others'.tr,
                                     address:
                                         '${locationController.pickPlaceMark.name ?? ''} '
                                         '${locationController.pickPlaceMark.locality ?? ''} '

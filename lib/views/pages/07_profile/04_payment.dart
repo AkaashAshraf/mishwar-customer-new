@@ -21,7 +21,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: GronikLayoutTwo(
-        appBarTitle: 'Payment Method',
+        appBarTitle: 'payment_method'.tr,
         /* <---- Content ----> */
         content: Expanded(
           child: Column(
@@ -44,7 +44,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                       topRight: Radius.circular(32),
                     )),
                 child: AppButton(
-                  label: 'Add a Card',
+                  label: 'add_a_card'.tr,
                   onTap: () async {
                     showAddedPayment = await Get.bottomSheet(
                           AddACardSheet(),
@@ -103,7 +103,7 @@ class _ListOfPayments extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Master Card',
+                          'master_card'.tr,
                           style: AppText.heading2,
                         ),
                         AppSizes.hGap5,
@@ -128,7 +128,7 @@ class _ListOfPayments extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Card Number',
+                          'card_number'.tr,
                           style: AppText.paragraph1
                               .copyWith(color: AppColors.NEUTRAL_50),
                         ),
@@ -141,7 +141,7 @@ class _ListOfPayments extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Expires',
+                          'expires'.tr,
                           style: AppText.paragraph1
                               .copyWith(color: AppColors.NEUTRAL_50),
                         ),
@@ -190,7 +190,7 @@ class NoPaymentAvailable extends StatelessWidget {
             ),
             AppSizes.hGap10,
             Text(
-              'No Card',
+              'no_card'.tr,
               style: AppText.heading1.copyWith(
                 color: AppColors.NEUTRAL_800,
                 fontSize: 32,
@@ -198,7 +198,7 @@ class NoPaymentAvailable extends StatelessWidget {
             ),
             AppSizes.hGap10,
             Text(
-              'It looks like you do not have a credit or debit card yet.',
+              'it_looks_like_you_do_not_have_a_credit_or_debit_card_yet'.tr,
               style: AppText.paragraph1.copyWith(
                 color: AppColors.APP_BLACK,
               ),

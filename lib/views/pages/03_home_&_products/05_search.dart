@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:gronik/controller/product/search_product_controller.dart';
 import 'package:gronik/routes/routes.dart';
+import 'package:gronik/views/widgets/empty_view.dart';
 import '../../../constants/app_images.dart';
 import '../../../constants/app_sizes.dart';
 import '../../widgets/loading_bar.dart';
@@ -139,14 +140,14 @@ class _ResultView extends StatelessWidget {
                               AppSizes.wGap10,
                               DropdownButton<String>(
                                 underline: SizedBox(),
-                                value: 'low'.tr,
+                                value: 'low',
                                 items: [
                                   DropdownMenuItem(
                                     value: 'low'.tr,
                                     child: Text('lowest_price'.tr),
                                   ),
                                   DropdownMenuItem(
-                                    value: 'high'.tr,
+                                    value: 'high',
                                     child: Text('highest_price'.tr),
                                   )
                                 ],
@@ -165,20 +166,24 @@ class _ResultView extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: StaggeredGridView.countBuilder(
-                        crossAxisCount: 4,
-                        itemBuilder: (context, index) {
-                          return SingleProduct(
-                            onTap: () {
-                              Get.toNamed(Routes.prodcutDetails,
-                                  arguments: ctr.searchProducts[index]);
-                            },
-                            food: ctr.searchProducts[index],
-                          );
-                        },
-                        staggeredTileBuilder: (ti) => StaggeredTile.fit(2),
-                        itemCount: ctr.searchProducts.length,
-                      ),
+                      //<--- check list is empty or not --->
+                      child: ctr.searchProducts.isEmpty
+                          ? EmptyView()
+                          : StaggeredGridView.countBuilder(
+                              crossAxisCount: 4,
+                              itemBuilder: (context, index) {
+                                return SingleProduct(
+                                  onTap: () {
+                                    Get.toNamed(Routes.prodcutDetails,
+                                        arguments: ctr.searchProducts[index]);
+                                  },
+                                  food: ctr.searchProducts[index],
+                                );
+                              },
+                              staggeredTileBuilder: (ti) =>
+                                  StaggeredTile.fit(2),
+                              itemCount: ctr.searchProducts.length,
+                            ),
                     ),
                   ],
                 ),

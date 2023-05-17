@@ -19,7 +19,7 @@ class CallScreen extends StatelessWidget {
             children: [
               /* <---- Calling status ----> */
               Text(
-                'Calling...',
+                'calling'.tr,
                 style: TextStyle(color: Colors.black.withOpacity(0.6)),
               ),
               /* <---- Image of rider ----> */

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,13 +20,13 @@ class ApiClient extends GetConnect implements GetxService {
     baseUrl = appBaseUrl;
     timeout = Duration(seconds: 30);
     token = sharedPreferences.getString(AppConstants.TOKEN);
-    print('mujahid token: $token');
+    log('mujahid token: $token');
     late AddressModel _addressModel;
     try {
       _addressModel = AddressModel.fromJson(
           jsonDecode(sharedPreferences.getString(AppConstants.USER_ADDRESS)!));
       // print('mujhad Zone id:$_addressModel.zoneId.toString()');
-      print(_addressModel == null ? null : _addressModel.zoneId);
+      log(_addressModel == null ? 'null' : _addressModel.zoneId.toString());
     } catch (e) {}
     _mainHeaders = {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -52,7 +53,7 @@ class ApiClient extends GetConnect implements GetxService {
   }) async {
     try {
       if (Foundation.kDebugMode) {
-        print('====> GetX Call: $uri\nToken: $token');
+        log('====> GetX Call: $uri\nToken: $token');
       }
       Response response = await get(
         uri,
@@ -64,8 +65,7 @@ class ApiClient extends GetConnect implements GetxService {
 
       response = handleResponse(response);
       if (Foundation.kDebugMode) {
-        print(
-            '====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
+        log('====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
       }
       return response;
     } catch (e) {
@@ -84,8 +84,8 @@ class ApiClient extends GetConnect implements GetxService {
   }) async {
     try {
       if (Foundation.kDebugMode) {
-        print('====> GetX Call: $uri\nToken: $token');
-        print('====> Mujahid GetX Body: $body');
+        log('====> GetX Call: $uri\nToken: $token');
+        log('====> Mujahid GetX Body: $body');
       }
       Response response = await post(
         uri,
@@ -98,8 +98,7 @@ class ApiClient extends GetConnect implements GetxService {
       );
       response = handleResponse(response);
       if (Foundation.kDebugMode) {
-        print(
-            '====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
+        log('====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
       }
       return response;
     } catch (e) {
@@ -118,8 +117,8 @@ class ApiClient extends GetConnect implements GetxService {
   }) async {
     try {
       if (Foundation.kDebugMode) {
-        print('====> GetX Call: $uri\nToken: $token');
-        print('====> GetX Body: $body');
+        log('====> GetX Call: $uri\nToken: $token');
+        log('====> GetX Body: $body');
       }
       Response response = await put(
         uri,
@@ -132,8 +131,7 @@ class ApiClient extends GetConnect implements GetxService {
       );
       response = handleResponse(response);
       if (Foundation.kDebugMode) {
-        print(
-            '====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
+        log('====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
       }
       return response;
     } catch (e) {
@@ -150,7 +148,7 @@ class ApiClient extends GetConnect implements GetxService {
   }) async {
     try {
       if (Foundation.kDebugMode) {
-        print('====> GetX Call: $uri\nToken: $token');
+        log('====> GetX Call: $uri\nToken: $token');
       }
       Response response = await delete(
         uri,
@@ -161,8 +159,7 @@ class ApiClient extends GetConnect implements GetxService {
       );
       response = handleResponse(response);
       if (Foundation.kDebugMode) {
-        print(
-            '====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
+        log('====> GetX Response: [${response.statusCode}] $uri\n${response.body}');
       }
       return response;
     } catch (e) {

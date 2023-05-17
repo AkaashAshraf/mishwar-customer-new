@@ -9,6 +9,7 @@ import 'package:gronik/views/widgets/custome_image_view.dart';
 import 'package:gronik/views/widgets/shimmers/shimmer_product_grid_view.dart';
 import '../../../controller/cart/cart_controller.dart';
 import '../../../constants/app_sizes.dart';
+import '../../../utils/show_snack_bar.dart';
 import '../../widgets/gronik_layout.dart';
 
 import '00_entrypoint.dart';
@@ -29,7 +30,9 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
   @override
   void initState() {
     ctr = CategoryDetailController.to;
-    ctr.fetchProductByCategory(widget.category.id);
+    Future.delayed(Duration(microseconds: 12), () {
+      ctr.fetchProductByCategory(widget.category.id);
+    });
     super.initState();
   }
 
@@ -123,6 +126,7 @@ class _SingleProductState extends State<SingleProduct>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  height: 150,
                   margin: EdgeInsets.all(10),
                   child: CustomImageView(
                     '${widget.food.image?[0]}',
@@ -238,10 +242,7 @@ class _SingleProductState extends State<SingleProduct>
                           // Add to cart
                           onTap: () {
                             CartController.to.addItem(widget.food, quantity);
-                            //  DummyData.cartItems.add(
-                            //   DummyData.foods[widget.foodIndex!],
-                            // );
-                            // Get.find<CartController>().cartItemsLength.value++;
+                            showSuccessMessage('added_to_cart'.tr);
                           },
                           child: Icon(
                             Icons.add,

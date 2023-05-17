@@ -11,7 +11,7 @@ class ScanCardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GronikLayoutTwo(
-        appBarTitle: 'Scan card',
+        appBarTitle: 'scan_card'.tr,
         content: Expanded(
           child: Container(
             decoration: BoxDecoration(
@@ -33,7 +33,7 @@ class ScanCardScreen extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.all(15),
                   child: Text(
-                    'Place the front side of your card in a green square',
+                    'place_the_front_side_of_your_card_in_a_green_square'.tr,
                     style: AppText.paragraph1
                         .copyWith(color: AppColors.PLACEHOLDER_2),
                     textAlign: TextAlign.center,

@@ -54,7 +54,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           AppSizes.hGap20,
                           GronikTextField(
-                            labelText: 'email',
+                            labelText: 'email'.tr,
                             hintText: 'enter_your_email'.tr,
                             textInputType: TextInputType.emailAddress,
                             textEditingController: ctr.sEmailController,
@@ -62,8 +62,8 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           AppSizes.hGap20,
                           GronikTextField(
-                            labelText: 'password',
-                            hintText: 'enter_a_password',
+                            labelText: 'password'.tr,
+                            hintText: 'enter_a_password'.tr,
                             isItPassWordBox: true,
                             textEditingController: ctr.sPasswordController,
                             validator: Validation.validatePassword,

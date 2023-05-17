@@ -33,7 +33,7 @@ class SuccessOrderDialog extends StatelessWidget {
             AppSizes.hGap40,
             /* <---- Header ----> */
             Text(
-              'Order Successful',
+              'order_successful'.tr,
               style: AppText.heading1.copyWith(color: AppColors.APP_BLACK),
             ),
             AppSizes.hGap10,

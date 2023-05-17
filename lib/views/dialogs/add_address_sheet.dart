@@ -64,7 +64,7 @@ class AddAddressSheet extends StatelessWidget {
                         DropdownMenuItem(
                           value: 'country'.tr,
                           child: Text(
-                            'Country',
+                            'country'.tr,
                             style: TextStyle(color: AppColors.NEUTRAL_50),
                           ),
                         ),
@@ -92,7 +92,7 @@ class AddAddressSheet extends StatelessWidget {
                         DropdownMenuItem(
                           value: 'city'.tr,
                           child: Text(
-                            'City',
+                            'city'.tr,
                             style: TextStyle(color: AppColors.NEUTRAL_50),
                           ),
                         ),

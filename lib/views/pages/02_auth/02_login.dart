@@ -172,7 +172,7 @@ class LoginScreen extends StatelessWidget {
                 InkWell(
                   onTap: ctr.navToSignUp,
                   child: Text(
-                    'Sign up',
+                    'sign_up'.tr,
                     style: AppText.paragraph1
                         .copyWith(color: AppColors.PRIMARY_COLOR, fontSize: 14),
                   ),

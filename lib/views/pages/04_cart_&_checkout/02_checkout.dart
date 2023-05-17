@@ -36,7 +36,7 @@ class CheckoutScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'address',
+                              'address'.tr,
                               style: AppText.heading2
                                   .copyWith(color: AppColors.NEUTRAL_800),
                             ),
@@ -49,7 +49,7 @@ class CheckoutScreen extends StatelessWidget {
                                 );
                               },
                               child: Text(
-                                'Add new',
+                                'add_new'.tr,
                                 style: AppText.paragraph1.copyWith(
                                     fontSize: 14,
                                     color: AppColors.PRIMARY_COLOR),
@@ -79,7 +79,7 @@ class CheckoutScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Office',
+                                  'office'.tr,
                                   style: AppText.paragraph1
                                       .copyWith(fontWeight: FontWeight.bold),
                                 ),
@@ -133,7 +133,7 @@ class CheckoutScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Payment',
+                              'payment'.tr,
                               style: AppText.heading2
                                   .copyWith(color: AppColors.NEUTRAL_800),
                             ),
@@ -145,7 +145,7 @@ class CheckoutScreen extends StatelessWidget {
                                 );
                               },
                               child: Text(
-                                'Add new',
+                                'add_new'.tr,
                                 style: AppText.paragraph1.copyWith(
                                     fontSize: 14,
                                     color: AppColors.PRIMARY_COLOR),
@@ -176,7 +176,7 @@ class CheckoutScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Mastercard',
+                                  'mastercard'.tr,
                                   style: AppText.paragraph1
                                       .copyWith(fontWeight: FontWeight.bold),
                                 ),
@@ -212,7 +212,7 @@ class CheckoutScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Visa Card',
+                                  'visa_card'.tr,
                                   style: AppText.paragraph1
                                       .copyWith(fontWeight: FontWeight.bold),
                                 ),
@@ -246,7 +246,7 @@ class CheckoutScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Cash on delivery',
+                                  'cash_on_delivery'.tr,
                                   style: AppText.paragraph1
                                       .copyWith(fontWeight: FontWeight.bold),
                                 ),
@@ -295,7 +295,7 @@ class CheckoutScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Total: \$30.00',
+                        'total'.tr + ': \$30.00',
                         style: AppText.heading2,
                       ),
                       InkWell(
@@ -313,7 +313,7 @@ class CheckoutScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                'Continue',
+                                'continue'.tr,
                                 style: AppText.paragraph1
                                     .copyWith(color: Colors.white),
                               ),

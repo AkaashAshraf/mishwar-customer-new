@@ -23,7 +23,7 @@ class OrderPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Order',
+                  'order'.tr,
                   style: AppText.heading1.copyWith(color: Colors.white),
                 ),
               ],
@@ -58,20 +58,20 @@ class OrderPage extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               children: [
                                 CategoryButton(
-                                  buttonLabel: 'All Orders',
+                                  buttonLabel: 'all_orders'.tr,
                                   onTap: null,
                                   active: true,
                                 ),
                                 CategoryButton(
-                                  buttonLabel: 'Pending',
+                                  buttonLabel: 'pending'.tr,
                                   onTap: null,
                                 ),
                                 CategoryButton(
-                                  buttonLabel: 'Processing',
+                                  buttonLabel: 'processing'.tr,
                                   onTap: null,
                                 ),
                                 CategoryButton(
-                                  buttonLabel: 'Delivered',
+                                  buttonLabel: 'delivered'.tr,
                                   onTap: null,
                                 ),
                               ],
@@ -226,7 +226,7 @@ class SingleProductOrderList extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
-                      completedOrder ? 'Delivered' : 'Processing',
+                      completedOrder ? 'delivered'.tr : 'processing'.tr,
                       style: TextStyle(color: Colors.black),
                     ),
                   ),

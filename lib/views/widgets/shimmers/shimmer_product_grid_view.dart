@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gronik/views/widgets/shimmers/shimmer_single_product.dart';
 
+import '../empty_view.dart';
+
 class ShimmerProductGridView extends StatelessWidget {
   final bool isLoading;
   final Widget child;
@@ -17,7 +19,7 @@ class ShimmerProductGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (!isLoading) {
       if (list.isEmpty) {
-        return Text('no item thers');
+        return EmptyView();
       }
       return child;
     }

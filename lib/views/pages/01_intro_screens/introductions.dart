@@ -4,10 +4,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 import 'package:gronik/constants/app_defaults.dart';
 import 'package:gronik/constants/app_images.dart';
 import 'package:gronik/constants/app_sizes.dart';
+import 'package:gronik/routes/routes.dart';
 import 'package:gronik/services/intro_service.dart';
 import 'package:gronik/views/pages/02_auth/01_sign_up.dart';
 import 'package:gronik/constants/app_colors.dart';
@@ -47,7 +47,7 @@ class _IntroductionScreensState extends State<IntroductionScreens> {
   _onGetStarted() {
     if (_currentPage.value == _introPages.length - 1) {
       IntroService.saveIntroHasBeeenViewed();
-      Get.offAll(() => SignUpScreen());
+      Get.offAllNamed(Routes.login);
     } else {
       _pageController.animateToPage(
         _currentPage.value + 1,

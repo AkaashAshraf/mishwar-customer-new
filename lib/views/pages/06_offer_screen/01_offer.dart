@@ -10,7 +10,7 @@ class OfferPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GronikLayoutTwo(
-      appBarTitle: 'Offer',
+      appBarTitle: 'offer'.tr,
       backButtonFunction: () {
         Get.find<NavigationController>().getBackPrevScreen();
       },

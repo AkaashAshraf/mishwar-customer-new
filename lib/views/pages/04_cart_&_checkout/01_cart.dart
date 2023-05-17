@@ -268,6 +268,7 @@ class SingleProductHorizontal extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Container(
+              margin: EdgeInsets.only(right: 10),
               child: CustomImageView(
                 '${food.image?[0]}',
                 type: AppConstants.PRODUCT_IMG,

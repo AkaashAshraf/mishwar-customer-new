@@ -49,8 +49,8 @@ class ResetPassword extends StatelessWidget {
                     child: Column(
                       children: [
                         GronikTextField(
-                          labelText: 'Old Password',
-                          hintText: 'Password',
+                          labelText: 'old_password'.tr,
+                          hintText: 'password'.tr,
                           textInputType: TextInputType.emailAddress,
                           textEditingController: null,
                           suffxIcon: Icon(

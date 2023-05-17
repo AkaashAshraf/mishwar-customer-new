@@ -29,7 +29,7 @@ class Validation {
     if (value == null || value.isEmpty) {
       return "password_is_required".tr;
     } else if (value.length < 6) {
-      return "Password is too short";
+      return "password_is_too_short".tr;
     } else {
       return null;
     }
